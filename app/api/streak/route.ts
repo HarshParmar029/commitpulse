@@ -100,7 +100,7 @@ export async function GET(request: Request) {
     const stats = calculateStreak(calendar, timezone);
     const svg = generateSVG(stats, params, calendar);
 
-    // 4. Calculate Cache Control  reset at local midnight when ?tz= is supplied,
+    // 4. Calculate Cache Control — reset at local midnight when ?tz= is supplied,
     //    otherwise fall back to UTC midnight (original behaviour).
     //    Random themes are never cached because their output changes on every request.
     const secondsToMidnight = tzParam
@@ -146,7 +146,7 @@ export async function GET(request: Request) {
         status: 404,
         headers: {
           'Content-Type': 'image/svg+xml',
-          'Cache-Control': 'no-cache',
+          'Cache-Control': 'public, s-maxage=60',
           'Content-Security-Policy':
             "default-src 'none'; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com;",
         },
@@ -165,7 +165,7 @@ export async function GET(request: Request) {
       status: 500,
       headers: {
         'Content-Type': 'image/svg+xml',
-        'Cache-Control': 'no-cache',
+        'Cache-Control': 'public, s-maxage=60',
       },
     });
   }
