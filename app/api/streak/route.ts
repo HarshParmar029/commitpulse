@@ -156,7 +156,7 @@ export async function GET(request: Request) {
       status: 500,
       headers: {
         'Content-Type': 'image/svg+xml',
-        'Cache-Control': 'no-cache',
+        'Cache-Control': 'public, s-maxage=60',
       },
     });
   }
